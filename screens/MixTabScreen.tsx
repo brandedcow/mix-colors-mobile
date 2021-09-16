@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import Palette from '../components/Palette';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 
@@ -12,7 +12,7 @@ export default function MixTabScreen({ navigation }: RootTabScreenProps<'TabOne'
         <Text>Tray</Text>
       </View>
       <View style={styles.palette}>
-        <Text>Palette</Text>
+        <Palette />
       </View>
     </View>
   );
@@ -25,12 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tray: {
-    flex: 1,
     backgroundColor: 'green',
     width: '100%'
   },
   palette: {
-    flex: 1,
     backgroundColor: 'red',
     width: '100%'
   }
