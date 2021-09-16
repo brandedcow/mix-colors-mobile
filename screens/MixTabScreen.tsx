@@ -25,11 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tray: {
+    flex: 1,
     backgroundColor: 'green',
     width: '100%'
   },
   palette: {
-    backgroundColor: 'red',
+    flex: 1,
     width: '100%'
   }
 });
