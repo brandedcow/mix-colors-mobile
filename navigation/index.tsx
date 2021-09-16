@@ -7,6 +7,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
@@ -38,7 +39,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={TopTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -47,22 +48,19 @@ function RootNavigator() {
   );
 }
 
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const TopTab = createMaterialTopTabNavigator<RootTabParamList>();
 
-function BottomTabNavigator() {
+function TopTabNavigator() {
   const colorScheme = useColorScheme();
 
   return (
-    <BottomTab.Navigator
+    <TopTab.Navigator
       initialRouteName="TabOne"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}>
-      <BottomTab.Screen
+        tabBarActiveTintColor: Colors[colorScheme].tint
+      }}
+    >
+      <TopTab.Screen 
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
@@ -71,9 +69,10 @@ function BottomTabNavigator() {
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
+              style={({ pressed}) => ({
                 opacity: pressed ? 0.5 : 1,
-              })}>
+              })}
+            >
               <FontAwesome
                 name="info-circle"
                 size={25}
@@ -81,20 +80,69 @@ function BottomTabNavigator() {
                 style={{ marginRight: 15 }}
               />
             </Pressable>
-          ),
+          )
         })}
       />
-      <BottomTab.Screen
+      <TopTab.Screen
         name="TabTwo"
         component={TabTwoScreen}
         options={{
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />
         }}
       />
-    </BottomTab.Navigator>
-  );
+    </TopTab.Navigator>
+  )
 }
+
+/**
+ * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
+ * https://reactnavigation.org/docs/bottom-tab-navigator
+ */
+// const BottomTab = createBottomTabNavigator<RootTabParamList>();
+
+// function BottomTabNavigator() {
+//   const colorScheme = useColorScheme();
+
+//   return (
+//     <BottomTab.Navigator
+//       initialRouteName="TabOne"
+//       screenOptions={{
+//         tabBarActiveTintColor: Colors[colorScheme].tint,
+//       }}>
+//       <BottomTab.Screen
+//         name="TabOne"
+//         component={TabOneScreen}
+//         options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
+//           title: 'Tab One',
+//           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+//           headerRight: () => (
+//             <Pressable
+//               onPress={() => navigation.navigate('Modal')}
+//               style={({ pressed }) => ({
+//                 opacity: pressed ? 0.5 : 1,
+//               })}>
+//               <FontAwesome
+//                 name="info-circle"
+//                 size={25}
+//                 color={Colors[colorScheme].text}
+//                 style={{ marginRight: 15 }}
+//               />
+//             </Pressable>
+//           ),
+//         })}
+//       />
+//       <BottomTab.Screen
+//         name="TabTwo"
+//         component={TabTwoScreen}
+//         options={{
+//           title: 'Tab Two',
+//           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+//         }}
+//       />
+//     </BottomTab.Navigator>
+//   );
+// }
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
