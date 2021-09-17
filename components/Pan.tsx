@@ -2,6 +2,7 @@ import React from 'react'
 import { Pressable, StyleSheet } from 'react-native'
 import { Text } from './Themed'
 import Color from '../types/Color'
+import isDarkColor from '../lib/isDarkColor'
 
 type PanProps = {
   name: string
@@ -26,7 +27,9 @@ export default function Pan(props: PanProps) {
         backgroundColor: `#${props.hex}`
       }}
     >
-      <Text>
+      <Text style={{
+        color: isDarkColor(props.hex) ? 'white' : 'black'
+      }}>
         {props.name}
       </Text>
     </Pressable>
