@@ -7,7 +7,7 @@ import Color from '../types/Color'
 
 export default function Tray() {
   const trayState = useTrayState()
-  const color = trayState.getColor() || { hex: 'ffffff'}
+  const color = trayState.getColor()
 
   // hack to treat hookstate as an array, not a proxy
   const sortedByWeight = JSON.parse(JSON.stringify(trayState.get()))

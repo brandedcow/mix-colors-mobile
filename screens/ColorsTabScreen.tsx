@@ -13,19 +13,22 @@ export default function ColorsTabScreen() {
 
   return (
     <View style={styles.container}>
-      {trays.map((tray: Array<Color>, idx: Number) => (
-        <View
-          key={`tray-${idx}`}
-          style={styles.card}
-        >
-          <View style={{
-            height: 40,
-            width: 120,
-            backgroundColor: `#${mixColors(...tray).hex}`
-          }} />
-          <Ionicons name="md-trash-outline" size={24} color="black" />
-        </View>
-      ))}
+      {trays.map((tray: Array<Color>, idx: Number) => {
+        const backgroundColor = mixColors(...tray)
+        return (
+          <View
+            key={`tray-${idx}`}
+            style={styles.card}
+          >
+            <View style={{
+              height: 40,
+              width: 120,
+              backgroundColor: backgroundColor === null ? 'white' : `#${backgroundColor.hex}`
+            }} />
+            <Ionicons name="md-trash-outline" size={24} color="black" />
+          </View>
+        )
+      })}
     </View>
   );
 }

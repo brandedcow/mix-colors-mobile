@@ -7,13 +7,14 @@ const wrapState = (gs) => ({
   getAll: () => gs.trays.value,
   get: () => {
     const currentTray = gs.trays[gs.currentTrayIdx.value]
-    if (currentTray.get().length > 0) {
-      return currentTray.get().map(color => color)
-    }
-    return []
+    return currentTray.get()
+  },
+  isLastTray: () => {
+    return gs.currentTrayIdx.value === gs.trays.value.length - 1
   },
   getColor: () => {
-    return mixColors(...gs.trays.value[gs.currentTrayIdx.value])
+    const mix = mixColors(...gs.trays.value[gs.currentTrayIdx.value])
+    return mix === null ? { hex: 'ffffff' } : mix
   },
   addColor: (newColor) => {
     const currentTray = gs.trays[gs.currentTrayIdx.value]
@@ -29,6 +30,22 @@ const wrapState = (gs) => ({
     } else {
       currentTray.merge([newColor])
     }
+  },
+  nextTray: () => {
+    if (gs.trays[gs.currentTrayIdx.value + 1].get() === undefined) {
+      gs.trays.merge([[]])
+    }
+    gs.currentTrayIdx.set(v => v + 1)
+  },
+  prevTray: () => {
+    if (gs.currentTrayIdx.value - 1 < 0) {
+      gs.currentTrayIdx.set(gs.trays.value.length - 1)
+    } else {
+      gs.currentTrayIdx.set(v => v - 1)
+    }
+  },
+  addTray: () => {
+    gs.trays.merge([[]])
   }
 })
 
