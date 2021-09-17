@@ -7,7 +7,7 @@ const wrapState = (gs) => ({
   get: () => {
     const currentTray = gs.trays[gs.currentTrayIdx.value]
     if (currentTray.get().length > 0) {
-      return currentTray.get()
+      return currentTray.get().map(color => color)
     }
     return []
   },

@@ -9,6 +9,10 @@ export default function Tray() {
   const trayState = useTrayState()
   const color = trayState.getColor() || { hex: 'ffffff'}
 
+  // hack to treat hookstate as an array, not a proxy
+  const sortedByWeight = JSON.parse(JSON.stringify(trayState.get()))
+    .sort((a:Color, b: Color) => a.weight >= b.weight ? -1 : 1)
+
   return (
     <View style={styles.container}>
       <View style={{
@@ -18,7 +22,7 @@ export default function Tray() {
         
       </View>
       <View style={styles.section}>
-        {trayState.get().map((color: Color, idx: Number) => (
+        {sortedByWeight.map((color: Color, idx: Number) => (
           <TrayInfo
             key={`tray-color-#${idx}`}
             name={color.name}
