@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@hookstate/core": "^3.0.11",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/material-top-tabs": "^6.0.2",
     "@react-navigation/native": "^6.0.2",
