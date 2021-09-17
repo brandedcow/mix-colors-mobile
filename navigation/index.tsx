@@ -15,7 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import MixTabScreen from '../screens/MixTabScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import ColorsTabScreeen from '../screens/ColorsTabScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -54,19 +54,19 @@ function TopTabNavigator() {
 
   return (
     <TopTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="MixTab"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint
       }}
     >
       <TopTab.Screen 
-        name="TabOne"
+        name="MixTab"
         component={MixTabScreen}
         options={{ title: 'Mix' }}
       />
       <TopTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="ColorsTab"
+        component={ColorsTabScreeen}
         options={{ title: 'Colors' }}
       />
     </TopTab.Navigator>
