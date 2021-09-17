@@ -6,9 +6,8 @@ import globalState  from './global'
 const wrapState = (gs) => ({
   get: () => {
     const currentTray = gs.trays[gs.currentTrayIdx.value]
-    console.log(currentTray)
-    if (currentTray.length > 0) {
-      return currentTray
+    if (currentTray.get().length > 0) {
+      return currentTray.get()
     }
     return []
   },

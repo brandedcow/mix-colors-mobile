@@ -1,9 +1,10 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { color } from 'react-native-reanimated';
 
 import Pan from './Pan';
-import { Text, View } from "./Themed";
+import { View } from "./Themed";
+import useTrayState from '../state/useTrayState';
+import Color from '../types/Color'
 
 const palette = {
   name: "Winsor & Newton Sketcher's Pocket Set",
@@ -96,6 +97,12 @@ const palette = {
 }
 
 export default function Palette() {
+  const trayState = useTrayState()
+
+  function handlePanPress(color: Color) {
+    trayState.addColor(color)
+  }
+
   return (
     <View style={styles.paletteContainer}>
       <View style={styles.palettePanRow}>
@@ -104,6 +111,7 @@ export default function Palette() {
             key={`pan-${idx}`}
             name={color.name}
             hex={color.hex}
+            onPress={handlePanPress}
           />
         ))}
       </View>
@@ -113,6 +121,7 @@ export default function Palette() {
             key={`pan-${idx}`}
             name={color.name}
             hex={color.hex}
+            onPress={handlePanPress}
           />
         ))}
       </View>

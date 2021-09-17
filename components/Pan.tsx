@@ -1,22 +1,35 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Text, View } from './Themed'
+import { Pressable, StyleSheet } from 'react-native'
+import { Text } from './Themed'
+import Color from '../types/Color'
 
 type PanProps = {
   name: string
   hex: string
+  onPress: (color: Color) => void
 }
 
 export default function Pan(props: PanProps) {
+  function handlePress() {
+    props.onPress({
+      name: props.name,
+      hex: props.hex,
+      weight: 1
+    })
+  }
+
   return (
-    <View style={{
+    <Pressable 
+      onPress={handlePress}
+      style={{
         ...styles.container,
         backgroundColor: `#${props.hex}`
-      }}>
+      }}
+    >
       <Text>
         {props.name}
       </Text>
-    </View>
+    </Pressable>
   )
 }
 
