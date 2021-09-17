@@ -4,6 +4,7 @@ import mixColors from '../lib/mixColors'
 import globalState  from './global'
 
 const wrapState = (gs) => ({
+  getAll: () => gs.trays.value,
   get: () => {
     const currentTray = gs.trays[gs.currentTrayIdx.value]
     if (currentTray.get().length > 0) {
