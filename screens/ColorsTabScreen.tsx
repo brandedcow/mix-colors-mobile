@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { View } from '../components/Themed';
@@ -18,6 +18,10 @@ export default function ColorsTabScreen({ navigation }: RootTabScreenProps<'Colo
     navigation.navigate('MixTab')
   }
 
+  function handleDeleteColor(index: Number) {
+    trayState.removeTray(index)
+  }
+
   const renderItem: ListRenderItem<Array<Color>> = ({ item, index }) => {
     const backgroundColor = mixColors(...item)
     return (
@@ -27,7 +31,9 @@ export default function ColorsTabScreen({ navigation }: RootTabScreenProps<'Colo
           width: 120,
           backgroundColor: backgroundColor === null ? 'white' : `#${backgroundColor.hex}`
         }} />
-        <Ionicons name="md-trash-outline" size={24} color="black" />
+        <TouchableOpacity onPress={() => handleDeleteColor(index)}>
+          <Ionicons name="md-trash-outline" size={24} color="black" />
+        </TouchableOpacity>
       </Pressable>
     )
   }

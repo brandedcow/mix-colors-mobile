@@ -1,4 +1,4 @@
-import { useState } from '@hookstate/core'
+import { none, useState } from '@hookstate/core'
 
 import mixColors from '../lib/mixColors'
 import globalState  from './global'
@@ -11,6 +11,18 @@ const wrapState = (gs) => ({
   },
   setCurrent: idx => {
     gs.currentTrayIdx.set(idx)
+  },
+  removeTray: idx => {
+    // if last tray, clear instead
+    if (gs.trays.value.length === 1) {
+      gs.trays[idx].set([])
+    }
+    // if not last tray, set non and decrement
+    else {
+      gs.currentTrayIdx.set(v => v - 1)
+      gs.trays[idx].set(none)
+    }
+
   },
   isLastTray: () => {
     return gs.currentTrayIdx.value === gs.trays.value.length - 1
