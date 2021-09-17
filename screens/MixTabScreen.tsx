@@ -4,10 +4,9 @@ import { AntDesign } from '@expo/vector-icons';
 
 import Palette from '../components/Palette';
 import Tray from '../components/Tray';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { View } from '../components/Themed';
 
-export default function MixTabScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function MixTabScreen() {
   return (
     <View style={styles.container}>
 
