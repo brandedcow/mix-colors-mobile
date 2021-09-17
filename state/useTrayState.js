@@ -9,6 +9,9 @@ const wrapState = (gs) => ({
     const currentTray = gs.trays[gs.currentTrayIdx.value]
     return currentTray.get()
   },
+  setCurrent: idx => {
+    gs.currentTrayIdx.set(idx)
+  },
   isLastTray: () => {
     return gs.currentTrayIdx.value === gs.trays.value.length - 1
   },

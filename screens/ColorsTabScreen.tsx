@@ -6,23 +6,29 @@ import { View } from '../components/Themed';
 import useTrayState from '../state/useTrayState';
 import mixColors from '../lib/mixColors'
 import Color from '../types/Color';
-import { FlatList, ListRenderItem } from 'react-native';
+import { FlatList, ListRenderItem, Pressable } from 'react-native';
+import { RootTabScreenProps } from '../types';
 
-export default function ColorsTabScreen() {
+export default function ColorsTabScreen({ navigation }: RootTabScreenProps<'ColorsTab'>) {
   const trayState = useTrayState()
   const trays = trayState.getAll()
 
-  const renderItem: ListRenderItem<Array<Color>> = ({ item }) => {
+  function handleCardPress(index: Number) {
+    trayState.setCurrent(index)
+    navigation.navigate('MixTab')
+  }
+
+  const renderItem: ListRenderItem<Array<Color>> = ({ item, index }) => {
     const backgroundColor = mixColors(...item)
     return (
-      <View style={styles.card}>
+      <Pressable style={styles.card} onPress={() => handleCardPress(index)}>
         <View style={{
           height: 40,
           width: 120,
           backgroundColor: backgroundColor === null ? 'white' : `#${backgroundColor.hex}`
         }} />
         <Ionicons name="md-trash-outline" size={24} color="black" />
-      </View>
+      </Pressable>
     )
   }
 
