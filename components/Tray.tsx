@@ -13,13 +13,16 @@ export default function Tray() {
   const sortedByWeight = JSON.parse(JSON.stringify(trayState.get()))
     .sort((a:Color, b: Color) => a.weight >= b.weight ? -1 : 1)
 
-  const renderItem: ListRenderItem<Color> = ({ item }) => {
+  const renderItem: ListRenderItem<Color> = ({ item, index }) => {
     return (
-    <TrayInfo
-      name={item.name}
-      hex={item.hex}
-      weight={item.weight}
-    />
+      <TrayInfo
+        name={item.name}
+        hex={item.hex}
+        weight={item.weight}
+        style={{
+          paddingTop: index === 0 ? 20: 0
+        }}
+      />
     )
   }
 
@@ -51,6 +54,6 @@ const styles = StyleSheet.create({
     flex: 2
   },
   trayInfo: {
-    flex: 3
+    flex: 3,
   }
 })

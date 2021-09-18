@@ -8,13 +8,17 @@ type TrayInfoProps = {
   name: String
   hex: String
   weight: Number
+  style: Object
 }
 
 export default function TrayInfo(props: TrayInfoProps) {
   const trayState = useTrayState()
 
   return (
-    <View style={styles.container}>
+    <View style={{
+      ...styles.container,
+      ...props.style
+    }}>
       <View style={{
         ...styles.colorSquare,
         backgroundColor: `#${props.hex}`
@@ -44,7 +48,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems:'center',
     paddingHorizontal: '10%',
-    paddingVertical: 5
+    paddingBottom: 20
   },
   colorSquare: {
     height: 24,
