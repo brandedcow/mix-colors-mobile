@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
+import { AntDesign } from '@expo/vector-icons'
 import useTrayState from '../state/useTrayState'
 import { View, Text } from './Themed'
 
@@ -10,6 +11,7 @@ type TrayInfoProps = {
 }
 
 export default function TrayInfo(props: TrayInfoProps) {
+  const trayState = useTrayState()
 
   return (
     <View style={styles.container}>
@@ -22,9 +24,16 @@ export default function TrayInfo(props: TrayInfoProps) {
       <Text style={styles.name}>
         {props.name}
       </Text>
-      <Text>
+
+      <TouchableOpacity onPress={() => trayState.decWeight(props)}>
+        <AntDesign name="minuscircleo" size={24} color="black" />
+      </TouchableOpacity>
+      <Text style={styles.weight}>
         {props.weight}
       </Text>
+      <TouchableOpacity onPress={() => trayState.incWeight(props)}>
+        <AntDesign name="pluscircleo" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   )
 }
@@ -38,11 +47,14 @@ const styles = StyleSheet.create({
     paddingVertical: 5
   },
   colorSquare: {
-    height: 12,
-    width: '10%',
+    height: 24,
+    width: '12%',
   },
   name: {
     flex: 1,
     paddingHorizontal: '10%'
+  },
+  weight: {
+    paddingHorizontal: '5%'
   }
 })

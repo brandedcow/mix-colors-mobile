@@ -26,12 +26,12 @@ export default function Tray() {
   return (
     <View style={styles.container}>
       <View style={{
-          ...styles.section,
+          ...styles.trayColor,
           backgroundColor: `#${color.hex}`
         }}>
         
       </View>
-      <View style={styles.section}>
+      <View style={styles.trayInfo}>
         <FlatList
           data={sortedByWeight}
           renderItem={renderItem}
@@ -47,7 +47,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row'
   },
-  section: {
-    flex: 1
+  trayColor: {
+    flex: 2
   },
+  trayInfo: {
+    flex: 3
+  }
 })

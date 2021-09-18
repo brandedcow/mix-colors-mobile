@@ -47,6 +47,32 @@ const wrapState = (gs) => ({
       currentTray.merge([newColor])
     }
   },
+  incWeight: (color) => {
+    const currentTray = gs.trays[gs.currentTrayIdx.value]
+
+    const foundIndex = currentTray.get()
+      .findIndex(c => color.name === c.name)
+
+    currentTray[foundIndex].set(c => ({
+      ...c,
+      weight: c.weight + 1
+    }))
+  },
+  decWeight: (color) => {
+    const currentTray = gs.trays[gs.currentTrayIdx.value]
+
+    const foundIndex = currentTray.get()
+      .findIndex(c => color.name === c.name)
+
+    if (currentTray[foundIndex].get().weight - 1 === 0) {
+      currentTray[foundIndex].set(none)
+    } else {
+      currentTray[foundIndex].set(c => ({
+        ...c,
+        weight: c.weight - 1
+      }))
+    }
+  },
   nextTray: () => {
     if (gs.trays[gs.currentTrayIdx.value + 1].get() === undefined) {
       gs.trays.merge([[]])
