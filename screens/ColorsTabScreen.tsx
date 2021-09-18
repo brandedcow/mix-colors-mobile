@@ -28,9 +28,23 @@ export default function ColorsTabScreen({ navigation }: RootTabScreenProps<'Colo
       <Pressable style={styles.card} onPress={() => handleCardPress(index)}>
         <View style={{
           height: 40,
-          width: 120,
+          width: '40%',
           backgroundColor: backgroundColor === null ? 'white' : `#${backgroundColor.hex}`
         }} />
+
+        <View style={styles.trayColorSwatch}>
+          {item.map((color, cIndex) => (
+            <View  
+              key={`tray-${index}-color-${cIndex}`}
+              style={{
+                height: '100%',
+                flex: color.weight,
+                backgroundColor: `#${color.hex}`
+              }}
+            />
+          ))}
+        </View>
+
         <TouchableOpacity onPress={() => handleDeleteColor(index)}>
           <Ionicons name="md-trash-outline" size={24} color="black" />
         </TouchableOpacity>
@@ -58,5 +72,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 20,
     paddingHorizontal: '10%',
+  },
+  trayColorSwatch: {
+    height: '100%',
+    width: '30%',
+    flexDirection: 'row',
   }
 });
