@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MixColors",
-    "slug": "MixColors",
+    "slug": "mix-colors",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,10 +19,14 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.chriskang.mixcolors",
+      "buildNumber": "1.0.0",
       "supportsTablet": true,
-      "requireFullScreen": true,
+      "requireFullScreen": true
     },
     "android": {
+      "package": "com.chriskang.mixcolors",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"

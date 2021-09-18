@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Button } from 'react-native'
+import { StyleSheet, FlatList, ListRenderItem } from 'react-native'
 import { View, Text } from './Themed'
 import TrayInfo from './TrayInfo'
 import useTrayState from '../state/useTrayState'
@@ -13,6 +13,16 @@ export default function Tray() {
   const sortedByWeight = JSON.parse(JSON.stringify(trayState.get()))
     .sort((a:Color, b: Color) => a.weight >= b.weight ? -1 : 1)
 
+  const renderItem: ListRenderItem<Color> = ({ item }) => {
+    return (
+    <TrayInfo
+      name={item.name}
+      hex={item.hex}
+      weight={item.weight}
+    />
+    )
+  }
+
   return (
     <View style={styles.container}>
       <View style={{
@@ -22,14 +32,11 @@ export default function Tray() {
         
       </View>
       <View style={styles.section}>
-        {sortedByWeight.map((color: Color, idx: Number) => (
-          <TrayInfo
-            key={`tray-color-#${idx}`}
-            name={color.name}
-            hex={color.hex}
-            weight={color.weight}
-          />
-        ))}
+        <FlatList
+          data={sortedByWeight}
+          renderItem={renderItem}
+          keyExtractor={(_,idx) => `tray-color-${idx}`}
+        />
       </View>
     </View>
   )
